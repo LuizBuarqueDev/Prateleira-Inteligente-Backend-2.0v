@@ -17,5 +17,5 @@ public interface IGenericService <E extends BaseEntity> {
 
     E update(UUID id,E entity);
 
-    void delete(UUID id);
+    boolean deleteById(UUID id);
 }
