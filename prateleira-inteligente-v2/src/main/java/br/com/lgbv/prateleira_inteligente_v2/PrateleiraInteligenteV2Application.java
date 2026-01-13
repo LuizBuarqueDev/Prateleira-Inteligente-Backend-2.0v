@@ -9,4 +9,5 @@ public class PrateleiraInteligenteV2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(PrateleiraInteligenteV2Application.class, args);
 	}
+
 }
