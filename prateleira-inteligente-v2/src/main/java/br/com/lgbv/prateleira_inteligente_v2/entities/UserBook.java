@@ -11,5 +11,5 @@ public class UserBook extends BaseEntity {
 
     private Integer rating;
 
-    private Boolean OnTheSheff;
+    private Boolean onTheSheff;
 }
