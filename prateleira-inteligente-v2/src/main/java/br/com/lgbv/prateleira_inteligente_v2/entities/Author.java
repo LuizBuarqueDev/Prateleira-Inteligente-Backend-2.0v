@@ -1,7 +1,6 @@
 package br.com.lgbv.prateleira_inteligente_v2.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Set;
@@ -11,8 +10,15 @@ import java.util.Set;
 @Table(name = "authors")
 public class Author extends BaseEntity {
 
+    @Column(nullable = false)
     private String name;
 
+    @ManyToMany
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name= "authors_id"),
+            inverseJoinColumns = @JoinColumn(name = "books_id")
+    )
     private Set<Book> books;
 
 }

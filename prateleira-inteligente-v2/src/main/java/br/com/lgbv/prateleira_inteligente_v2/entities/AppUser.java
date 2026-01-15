@@ -4,6 +4,7 @@ import br.com.lgbv.prateleira_inteligente_v2.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,4 +19,10 @@ public class AppUser extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserBook> userBooks;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments;
 }

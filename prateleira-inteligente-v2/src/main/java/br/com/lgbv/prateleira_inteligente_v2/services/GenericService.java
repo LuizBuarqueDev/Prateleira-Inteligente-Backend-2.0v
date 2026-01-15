@@ -1,23 +1,22 @@
 package br.com.lgbv.prateleira_inteligente_v2.services;
 
 import br.com.lgbv.prateleira_inteligente_v2.entities.BaseEntity;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
-@RequiredArgsConstructor
+
 public abstract class GenericService<E extends BaseEntity> implements IGenericService<E> {
 
-    protected final JpaRepository<E, UUID> repository;
+    protected abstract JpaRepository<E, UUID> getJpaRepository();
 
     @Override
     @Transactional
     public E save(E entity) {
         beforeSave(entity);
-        E saved = repository.save(entity);
+        E saved = getJpaRepository().save(entity);
         afterSave(entity);
         return saved;
     }
@@ -25,26 +24,26 @@ public abstract class GenericService<E extends BaseEntity> implements IGenericSe
     @Override
     @Transactional(readOnly = true)
     public E getById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Entity not found"));
+        return getJpaRepository().findById(id).orElseThrow(() -> new RuntimeException("Entity not found"));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<E> getAll() {
-        return repository.findAll();
+        return getJpaRepository().findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<E> getAllByIds(List<UUID> ids) {
-        return repository.findAllById(ids);
+        return getJpaRepository().findAllById(ids);
     }
 
     @Override
     @Transactional
     public E update(UUID id,E entity) {
         beforeUpdate(entity);
-        E saved = repository.save(entity);
+        E saved = getJpaRepository().save(entity);
         afterUpdate(entity);
         return saved;
     }
@@ -52,10 +51,10 @@ public abstract class GenericService<E extends BaseEntity> implements IGenericSe
     @Override
     @Transactional
     public boolean deleteById(UUID id) {
-        if (!repository.existsById(id)) {
+        if (!getJpaRepository().existsById(id)) {
             return false;
         }
-        repository.deleteById(id);
+        getJpaRepository().deleteById(id);
         return true;
     }
 

@@ -1,11 +1,10 @@
 package br.com.lgbv.prateleira_inteligente_v2.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Data
 @Entity
@@ -16,4 +15,12 @@ public class Comment extends BaseEntity {
     private String text;
 
     private Instant createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book books;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser user;
 }
