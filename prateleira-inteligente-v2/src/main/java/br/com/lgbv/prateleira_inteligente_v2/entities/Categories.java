@@ -3,6 +3,7 @@ package br.com.lgbv.prateleira_inteligente_v2.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -19,5 +20,5 @@ public class Categories extends BaseEntity {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 }

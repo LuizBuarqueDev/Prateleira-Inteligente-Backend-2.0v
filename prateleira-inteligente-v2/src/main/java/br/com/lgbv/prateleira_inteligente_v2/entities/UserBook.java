@@ -13,11 +13,11 @@ public class UserBook extends BaseEntity {
 
     private Integer rating;
 
-    private Boolean onTheShelf;
+    private Boolean onShelf;
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
-    private Book books;
+    private Book book;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

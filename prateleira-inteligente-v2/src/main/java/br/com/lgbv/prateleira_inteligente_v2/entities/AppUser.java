@@ -4,6 +4,7 @@ import br.com.lgbv.prateleira_inteligente_v2.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,8 +22,8 @@ public class AppUser extends BaseEntity {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private Set<UserBook> userBooks;
+    private Set<UserBook> userBooks = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
 }

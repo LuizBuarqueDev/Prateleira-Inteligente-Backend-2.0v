@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -28,14 +29,14 @@ public class Book extends BaseEntity {
     private Long assessmentQuantity;
 
     @ManyToMany(mappedBy = "books")
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     @ManyToMany(mappedBy = "books")
-    private Set<Categories> categories;
+    private Set<Categories> categories = new HashSet<>();
 
-    @OneToMany(mappedBy = "books")
-    private Set<UserBook> userBooks;
+    @OneToMany(mappedBy = "book")
+    private Set<UserBook> userBooks = new HashSet<>();
 
-    @OneToMany(mappedBy = "books")
-    private Set<Comment> comments;
+    @OneToMany(mappedBy = "book")
+    private Set<Comment> comments =  new HashSet<>();
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.Instant;
-import java.util.Set;
 
 @Data
 @Entity
@@ -18,7 +17,7 @@ public class Comment extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
-    private Book books;
+    private Book book;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
