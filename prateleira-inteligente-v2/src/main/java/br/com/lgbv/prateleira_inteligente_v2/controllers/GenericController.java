@@ -4,7 +4,6 @@ import br.com.lgbv.prateleira_inteligente_v2.entities.BaseEntity;
 import br.com.lgbv.prateleira_inteligente_v2.mappers.BaseMapper;
 import br.com.lgbv.prateleira_inteligente_v2.services.IGenericService;
 import jakarta.validation.Valid;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +12,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@RequestMapping("/api/")
 @RequiredArgsConstructor
-public abstract class GenericController<E extends BaseEntity,
+
+public abstract class GenericController<E extends
+        BaseEntity,
         DTO,
         S extends IGenericService<E>,
         M extends BaseMapper<E, DTO>>   {
 
     protected final S service;
     protected final M mapper;
+
+    protected GenericController() {
+        this.service = null;
+        this.mapper = null;
+    }
 
     @PostMapping
     public ResponseEntity<DTO> create (@Valid @RequestBody DTO dto) {

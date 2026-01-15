@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
-
 public abstract class GenericService<E extends BaseEntity> implements IGenericService<E> {
 
     protected abstract JpaRepository<E, UUID> getJpaRepository();
@@ -58,19 +57,11 @@ public abstract class GenericService<E extends BaseEntity> implements IGenericSe
         return true;
     }
 
-    protected void beforeSave(E entity) {
+    protected void beforeSave(E entity) {}
 
-    }
+    protected void afterSave(E entity) {}
 
-    protected void afterSave(E entity) {
+    protected void beforeUpdate(E entity) {}
 
-    }
-
-    protected void beforeUpdate(E entity) {
-
-    }
-
-    protected void afterUpdate(E entity) {
-
-    }
+    protected void afterUpdate(E entity) {}
 }
