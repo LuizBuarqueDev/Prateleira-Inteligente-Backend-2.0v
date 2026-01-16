@@ -1,54 +1,69 @@
 package br.com.lgbv.prateleira_inteligente_v2.services;
 
 import br.com.lgbv.prateleira_inteligente_v2.entities.BaseEntity;
+import br.com.lgbv.prateleira_inteligente_v2.mappers.BaseMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
-public abstract class GenericService<E extends BaseEntity> implements IGenericService<E> {
+@Transactional
+public abstract class GenericService<
+        E extends BaseEntity,
+        DTO
+        > implements IGenericService<DTO> {
 
     protected abstract JpaRepository<E, UUID> getJpaRepository();
 
+    protected abstract BaseMapper<E, DTO> getMapper();
+
     @Override
-    @Transactional
-    public E save(E entity) {
+    public DTO save(DTO dto) {
+        E entity = getMapper().toEntity(dto);
         beforeSave(entity);
         E saved = getJpaRepository().save(entity);
-        afterSave(entity);
-        return saved;
+        afterSave(saved);
+        return getMapper().toDto(saved);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public E getById(UUID id) {
-        return getJpaRepository().findById(id).orElseThrow(() -> new RuntimeException("Entity not found"));
+    public DTO getById(UUID id) {
+        return getMapper().toDto(
+                getJpaRepository().findById(id)
+                        .orElseThrow(() -> new RuntimeException("Entity not found"))
+        );
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<E> getAll() {
-        return getJpaRepository().findAll();
+    public List<DTO> getAll() {
+        return getJpaRepository().findAll()
+                .stream()
+                .map(getMapper()::toDto)
+                .toList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<E> getAllByIds(List<UUID> ids) {
-        return getJpaRepository().findAllById(ids);
+    public List<DTO> getAllByIds(List<UUID> ids) {
+        return getJpaRepository().findAllById(ids)
+                .stream()
+                .map(getMapper()::toDto)
+                .toList();
     }
 
     @Override
-    @Transactional
-    public E update(UUID id,E entity) {
+    public DTO update(UUID id, DTO dto) {
+        E entity = getMapper().toEntity(dto);
         beforeUpdate(entity);
         E saved = getJpaRepository().save(entity);
-        afterUpdate(entity);
-        return saved;
+        afterUpdate(saved);
+        return getMapper().toDto(saved);
     }
 
     @Override
-    @Transactional
     public boolean deleteById(UUID id) {
         if (!getJpaRepository().existsById(id)) {
             return false;
@@ -65,3 +80,4 @@ public abstract class GenericService<E extends BaseEntity> implements IGenericSe
 
     protected void afterUpdate(E entity) {}
 }
+

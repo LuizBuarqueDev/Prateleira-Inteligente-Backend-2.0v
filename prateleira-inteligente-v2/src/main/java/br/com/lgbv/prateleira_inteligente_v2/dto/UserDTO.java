@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Data
 public class UserDTO {
-    private String name;
+    private String username;
     private UserRole role;
-    private Set<UUID> books;
+    private Set<UUID> userBooks;
     private Set<UUID> comments;
 }

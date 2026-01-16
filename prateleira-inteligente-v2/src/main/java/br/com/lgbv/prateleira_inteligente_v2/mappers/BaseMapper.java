@@ -4,7 +4,6 @@ import br.com.lgbv.prateleira_inteligente_v2.entities.BaseEntity;
 
 import java.util.Set;
 import java.util.UUID;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public interface BaseMapper<E,DTO> {
@@ -13,15 +12,11 @@ public interface BaseMapper<E,DTO> {
 
     DTO toDto(E entity);
 
-    default Set<UUID> mapToIds(Set<? extends BaseEntity> entities) {
+    default Set<UUID> toIds(Set<? extends BaseEntity> entities) {
+        if (entities == null) return null;
+
         return entities.stream()
                 .map(BaseEntity::getId)
-                .collect(Collectors.toSet());
-    }
-
-    default <T extends BaseEntity> Set<T> mapToEntities(Set<UUID> ids, Function<UUID, T> fetcher) {
-        return ids.stream()
-                .map(fetcher)
                 .collect(Collectors.toSet());
     }
 }
