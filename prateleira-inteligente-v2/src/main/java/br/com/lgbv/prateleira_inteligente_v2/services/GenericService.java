@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Transactional
-public abstract class GenericService<
-        E extends BaseEntity,
-        DTO
-        > implements IGenericService<DTO> {
+public abstract class GenericService<E extends BaseEntity, DTO> implements IGenericService<DTO> {
 
     protected abstract JpaRepository<E, UUID> getJpaRepository();
 
@@ -31,7 +28,8 @@ public abstract class GenericService<
     @Transactional(readOnly = true)
     public DTO getById(UUID id) {
         return getMapper().toDto(
-                getJpaRepository().findById(id)
+                getJpaRepository()
+                        .findById(id)
                         .orElseThrow(() -> new RuntimeException("Entity not found"))
         );
     }

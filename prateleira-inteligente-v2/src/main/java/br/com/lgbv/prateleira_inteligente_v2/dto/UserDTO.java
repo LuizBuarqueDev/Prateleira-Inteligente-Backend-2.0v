@@ -10,6 +10,7 @@ import java.util.UUID;
 public class UserDTO {
     private String username;
     private UserRole role;
+    private String password;
     private Set<UUID> userBooks;
     private Set<UUID> comments;
 }

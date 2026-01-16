@@ -1,14 +1,16 @@
 package br.com.lgbv.prateleira_inteligente_v2.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "user_books")
+@Table(
+        name = "user_books",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "book_id"})
+        }
+)
 public class UserBook extends BaseEntity {
 
     private Integer rating;
