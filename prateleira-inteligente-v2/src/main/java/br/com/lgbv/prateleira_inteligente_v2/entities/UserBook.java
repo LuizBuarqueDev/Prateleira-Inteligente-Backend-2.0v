@@ -1,10 +1,13 @@
 package br.com.lgbv.prateleira_inteligente_v2.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(
         name = "user_books",
         uniqueConstraints = {

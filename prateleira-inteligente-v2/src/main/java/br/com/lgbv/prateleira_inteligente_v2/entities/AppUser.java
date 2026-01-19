@@ -2,13 +2,16 @@ package br.com.lgbv.prateleira_inteligente_v2.entities;
 
 import br.com.lgbv.prateleira_inteligente_v2.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "app_users")
 public class AppUser extends BaseEntity {
 

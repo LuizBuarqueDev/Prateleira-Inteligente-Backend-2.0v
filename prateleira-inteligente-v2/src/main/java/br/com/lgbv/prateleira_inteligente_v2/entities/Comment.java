@@ -1,12 +1,15 @@
 package br.com.lgbv.prateleira_inteligente_v2.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.Instant;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "comments")
 public class Comment extends BaseEntity {
 

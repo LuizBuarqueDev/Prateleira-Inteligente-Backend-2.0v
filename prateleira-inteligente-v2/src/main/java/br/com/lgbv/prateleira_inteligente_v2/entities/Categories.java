@@ -1,13 +1,16 @@
 package br.com.lgbv.prateleira_inteligente_v2.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "categories")
 public class Categories extends BaseEntity {
 

@@ -1,12 +1,12 @@
 package br.com.lgbv.prateleira_inteligente_v2.mappers;
 
 import br.com.lgbv.prateleira_inteligente_v2.dto.CommentDTO;
-import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.UserSimplifiedDTO;
 import br.com.lgbv.prateleira_inteligente_v2.entities.Comment;
+import br.com.lgbv.prateleira_inteligente_v2.mappers.simplified.UserSimplifiedMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {UserSimplifiedDTO.class})
+@Mapper(componentModel = "spring", uses = {UserSimplifiedMapper.class})
 public interface CommentMapper extends BaseMapper<Comment, CommentDTO> {
     @Override
     @Mapping(target = "book", ignore = true)
