@@ -1,6 +1,6 @@
 package br.com.lgbv.prateleira_inteligente_v2.dto;
 
-import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.UserSimplified;
+import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.UserSimplifiedDTO;
 import lombok.Data;
 
 import java.time.Instant;
@@ -12,5 +12,5 @@ public class CommentDTO {
     private String text;
     private Instant createdAt;
     private UUID bookId;
-    private UserSimplified user;
+    private UserSimplifiedDTO user;
 }

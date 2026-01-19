@@ -16,7 +16,7 @@ public class BookDTO {
     private String publisher;
     private Double score;
     private Long assessmentQuantity;
-    private Set<AuthorDTO> authors;
-    private Set<Categories> categories;
-    //Colocar categorias
+    private Set<UUID> authors;
+    private Set<CategoriesDTO> categories;
+    private Set<UUID> userBooks;
 }

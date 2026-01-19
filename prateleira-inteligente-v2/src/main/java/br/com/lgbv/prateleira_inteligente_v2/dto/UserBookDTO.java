@@ -1,6 +1,7 @@
 package br.com.lgbv.prateleira_inteligente_v2.dto;
 
-import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.UserSimplified;
+import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.BookSimplifiedDTO;
+import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.UserSimplifiedDTO;
 import lombok.Data;
 
 import java.util.UUID;
@@ -9,6 +10,6 @@ import java.util.UUID;
 public class UserBookDTO {
     private UUID id;
     private Integer rating;
-    private UUID bookId;
-    private UserSimplified user;
+    private BookSimplifiedDTO book;
+    private UserSimplifiedDTO user;
 }

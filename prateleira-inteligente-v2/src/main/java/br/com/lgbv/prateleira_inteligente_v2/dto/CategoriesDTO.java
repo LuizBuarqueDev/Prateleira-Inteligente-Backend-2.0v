@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Data
-public class Categories {
+public class CategoriesDTO {
     private UUID id;
     private String name;
     private Set<UUID> books;
