@@ -5,7 +5,10 @@ import br.com.lgbv.prateleira_inteligente_v2.entities.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(
+        componentModel = "spring",
+        uses = {AuthorMapper.class, CategoriesMapper.class}
+)
 public interface BookMapper extends BaseMapper<Book, BookDTO>{
 
     @Override
@@ -15,7 +18,6 @@ public interface BookMapper extends BaseMapper<Book, BookDTO>{
     Book toEntity(BookDTO bookDTO);
 
     @Override
-    @Mapping(target = "authors", expression = "java(toIds(entity.getAuthors()))")
     @Mapping(target = "userBooks", expression = "java(toIds(entity.getUserBooks()))")
     BookDTO toDto(Book entity);
 }
