@@ -1,10 +1,10 @@
 package br.com.lgbv.prateleira_inteligente_v2.services;
 
-import br.com.lgbv.prateleira_inteligente_v2.dto.AuthorDTO;
-import br.com.lgbv.prateleira_inteligente_v2.entities.Author;
-import br.com.lgbv.prateleira_inteligente_v2.mappers.AuthorMapper;
+import br.com.lgbv.prateleira_inteligente_v2.dto.BookDTO;
+import br.com.lgbv.prateleira_inteligente_v2.entities.Book;
 import br.com.lgbv.prateleira_inteligente_v2.mappers.BaseMapper;
-import br.com.lgbv.prateleira_inteligente_v2.repositories.AuthorRepository;
+import br.com.lgbv.prateleira_inteligente_v2.mappers.BookMapper;
+import br.com.lgbv.prateleira_inteligente_v2.repositories.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -13,18 +13,18 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class BookService extends GenericService <Author, AuthorDTO> {
+public class BookService extends GenericService<Book, BookDTO> {
 
-    private final AuthorRepository authorRepository;
-    private final AuthorMapper authorMapper;
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
     @Override
-    protected JpaRepository<Author, UUID> getJpaRepository() {
-        return authorRepository;
+    protected JpaRepository<Book, UUID> getJpaRepository() {
+        return bookRepository;
     }
 
     @Override
-    protected BaseMapper<Author, AuthorDTO> getMapper() {
-        return authorMapper;
+    protected BaseMapper<Book, BookDTO> getMapper() {
+        return bookMapper;
     }
 }
