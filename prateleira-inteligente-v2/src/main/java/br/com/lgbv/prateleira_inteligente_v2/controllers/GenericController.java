@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/api")
-public abstract class GenericController<DTO> {
+public abstract class GenericController<DTO, S extends IGenericService<DTO>> {
 
-    protected final IGenericService<DTO> service;
+    protected final S service;
 
-    protected GenericController(IGenericService<DTO> service) {
+    protected GenericController(S service) {
         this.service = service;
     }
 
