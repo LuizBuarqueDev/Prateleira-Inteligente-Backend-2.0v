@@ -68,6 +68,12 @@ public abstract class GenericController<DTO, S extends IGenericService<DTO>> {
         return ResponseEntity.ok(service.getAllByIds(ids));
     }
 
+    @Operation(summary = "Get count of all resources")
+    @GetMapping("/count")
+    public ResponseEntity<Long> countAll() {
+        return ResponseEntity.ok(service.countAll());
+    }
+
     @Operation(summary = "Delete a resource by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Resource deleted successfully"),

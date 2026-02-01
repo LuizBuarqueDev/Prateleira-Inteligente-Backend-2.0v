@@ -53,6 +53,11 @@ public abstract class GenericService<E extends BaseEntity, DTO> implements IGene
     }
 
     @Override
+    public Long countAll() {
+        return getJpaRepository().count();
+    }
+
+    @Override
     public DTO update(UUID id, DTO dto) {
         E entity = getMapper().toEntity(dto);
         beforeUpdate(entity);
