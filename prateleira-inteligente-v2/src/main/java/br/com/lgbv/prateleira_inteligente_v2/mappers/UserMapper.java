@@ -16,5 +16,6 @@ public interface UserMapper extends BaseMapper<AppUser, UserDTO> {
     @Override
     @Mapping(target = "userBooks", expression = "java(toIds(entity.getUserBooks()))")
     @Mapping(target = "comments", expression = "java(toIds(entity.getComments()))")
+    @Mapping(target = "password", ignore = true)
     UserDTO toDto(AppUser entity);
 }
