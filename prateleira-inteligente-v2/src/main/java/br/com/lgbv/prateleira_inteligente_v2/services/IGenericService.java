@@ -13,6 +13,8 @@ public interface IGenericService<DTO> {
 
     List<DTO> getAllByIds(List<UUID> ids);
 
+    Long countAll();
+
     DTO update(UUID id, DTO dto);
 
     boolean deleteById(UUID id);

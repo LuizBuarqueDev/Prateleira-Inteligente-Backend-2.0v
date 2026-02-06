@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/api")
-public abstract class GenericController<DTO> {
+public abstract class GenericController<DTO, S extends IGenericService<DTO>> {
 
-    protected final IGenericService<DTO> service;
+    protected final S service;
 
-    protected GenericController(IGenericService<DTO> service) {
+    protected GenericController(S service) {
         this.service = service;
     }
 
@@ -66,6 +66,12 @@ public abstract class GenericController<DTO> {
     @GetMapping("/ids")
     public ResponseEntity<List<DTO>> getByIds(@RequestParam List<UUID> ids) {
         return ResponseEntity.ok(service.getAllByIds(ids));
+    }
+
+    @Operation(summary = "Get count of all resources")
+    @GetMapping("/count")
+    public ResponseEntity<Long> countAll() {
+        return ResponseEntity.ok(service.countAll());
     }
 
     @Operation(summary = "Delete a resource by ID")

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
         name = "Users",
         description = "Operations related to system users"
 )
-public class UserController extends GenericController<UserDTO> {
+public class UserController extends GenericController<UserDTO, UserService> {
 
     public UserController(UserService service) {
         super(service);
