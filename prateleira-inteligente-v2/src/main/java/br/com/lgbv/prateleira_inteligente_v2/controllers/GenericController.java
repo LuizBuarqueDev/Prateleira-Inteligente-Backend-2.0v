@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/api")
 public abstract class GenericController<DTO, S extends IGenericService<DTO>> {
 
     protected final S service;

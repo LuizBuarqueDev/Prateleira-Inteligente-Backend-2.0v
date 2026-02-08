@@ -1,7 +1,7 @@
 package br.com.lgbv.prateleira_inteligente_v2.dto;
 
 import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.AuthorSimplifiedDTO;
-import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.CategoriesSimplifiedDDTO;
+import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.CategoriesSimplifiedDTO;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,6 +19,6 @@ public class BookDTO {
     private Double score;
     private Long assessmentQuantity;
     private Set<AuthorSimplifiedDTO> authors;
-    private Set<CategoriesSimplifiedDDTO> categories;
+    private Set<CategoriesSimplifiedDTO> categories;
     private Set<UUID> userBooks;
 }

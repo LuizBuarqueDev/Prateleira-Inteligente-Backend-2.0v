@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/books")
 @Tag(name = "Books", description = "Operations related to books")
 public class BookController
         extends GenericController<BookDTO, BookService> {

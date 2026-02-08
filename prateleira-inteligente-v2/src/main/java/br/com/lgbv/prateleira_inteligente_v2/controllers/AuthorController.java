@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/authors")
+@RequestMapping("/api/authors")
 @Tag(
         name = "Authors",
         description = "Operations related to system authors"

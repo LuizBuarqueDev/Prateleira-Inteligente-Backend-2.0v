@@ -9,4 +9,6 @@ public class BookSimplifiedDTO {
     private UUID id;
     private String title;
     private byte[] cover;
+    private Double score;
+    private Long assessmentQuantity;
 }
