@@ -8,6 +8,7 @@ import java.util.UUID;
 public class BookSimplifiedDTO {
     private UUID id;
     private String title;
+    private String publisher;
     private byte[] cover;
     private Double score;
     private Long assessmentQuantity;
