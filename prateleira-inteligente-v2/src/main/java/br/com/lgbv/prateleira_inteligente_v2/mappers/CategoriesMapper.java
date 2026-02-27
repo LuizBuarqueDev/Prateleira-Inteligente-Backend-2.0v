@@ -14,4 +14,8 @@ public interface CategoriesMapper extends BaseMapper <Categories, CategoriesDTO>
     @Override
     @Mapping(target = "books", expression = "java(toIds(entity.getBooks()))")
     CategoriesDTO toDto(Categories entity);
+
+    default String toName(Categories category) {
+        return category.getName();
+    }
 }
