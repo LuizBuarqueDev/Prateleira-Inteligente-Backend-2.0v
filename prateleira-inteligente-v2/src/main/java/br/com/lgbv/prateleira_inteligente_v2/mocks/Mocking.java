@@ -25,6 +25,8 @@ public class Mocking {
     @PostConstruct
     public void loadMock() {
 
+        if (bookRepository.count() > 0) return;
+
         /* ================= USER ================= */
         AppUser user = new AppUser();
         user.setUsername("luiz");
@@ -32,7 +34,7 @@ public class Mocking {
         user.setRole(UserRole.USER);
         userRepository.save(user);
 
-        /* ================= CATEGORIES ================= */
+        /* ================= CATEGORY ================= */
         Categories category = new Categories();
         category.setName("Tecnologia");
         categoriesRepository.save(category);
@@ -42,42 +44,43 @@ public class Mocking {
         author.setName("Luiz Gabriel");
         authorRepository.save(author);
 
-        /* ================= BOOK ================= */
-        Book book = new Book();
-        book.setTitle("Spring Boot Profissional");
-        book.setDescription("Livro sobre arquitetura com Spring Boot");
-        book.setPublisher("Tech Books");
-        book.setPublicationDate(LocalDate.of(2024, 1, 1));
-        book.setScore(4.8);
-        book.setAssessmentQuantity(120L);
+        for (int i = 1; i <= 10; i++) {
 
-        // relacionamentos ManyToMany
-        book.setAuthors(Set.of(author));
-        book.setCategories(Set.of(category));
+            /* ================= BOOK ================= */
+            Book book = new Book();
+            book.setTitle("Spring Boot Avançado " + i);
+            book.setDescription("Livro focado em arquitetura backend com Spring Boot - Volume " + i);
+            book.setPublisher("Tech Books");
+            book.setPublicationDate(LocalDate.of(2024, 1, i));
+            book.setScore(4.0 + (i * 0.1));
+            book.setAssessmentQuantity(100L + i);
 
-        bookRepository.save(book);
+            book.setAuthors(Set.of(author));
+            book.setCategories(Set.of(category));
 
-        // sincroniza lado inverso (boa prática)
-        author.getBooks().add(book);
-        category.getBooks().add(book);
+            bookRepository.save(book);
+
+            author.getBooks().add(book);
+            category.getBooks().add(book);
+
+            /* ================= USER_BOOK ================= */
+            UserBook userBook = new UserBook();
+            userBook.setUser(user);
+            userBook.setBook(book);
+            userBook.setRating(4 + (i % 2));
+            userBook.setOnShelf(true);
+            userBookRepository.save(userBook);
+
+            /* ================= COMMENT ================= */
+            Comment comment = new Comment();
+            comment.setUser(user);
+            comment.setBook(book);
+            comment.setText("Comentário sobre o livro volume " + i);
+            comment.setCreatedAt(Instant.now());
+            commentRepository.save(comment);
+        }
 
         authorRepository.save(author);
         categoriesRepository.save(category);
-
-        /* ================= USER_BOOK ================= */
-        UserBook userBook = new UserBook();
-        userBook.setUser(user);
-        userBook.setBook(book);
-        userBook.setRating(5);
-        userBook.setOnShelf(true);
-        userBookRepository.save(userBook);
-
-        /* ================= COMMENT ================= */
-        Comment comment = new Comment();
-        comment.setUser(user);
-        comment.setBook(book);
-        comment.setText("Excelente livro, bem completo!");
-        comment.setCreatedAt(Instant.now());
-        commentRepository.save(comment);
     }
 }
