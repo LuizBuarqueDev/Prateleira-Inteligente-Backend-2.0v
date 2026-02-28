@@ -27,4 +27,10 @@ public class BookController
     public ResponseEntity<List<BookSimplifiedDTO>> getAllSimplifiedBooks() {
         return ResponseEntity.ok(service.geAllSimplifiedBook());
     }
+
+    @GetMapping("/search")
+    @Operation(summary = "Search books")
+    public ResponseEntity<List<BookSimplifiedDTO>> search(String term, int page, int size) {
+        return ResponseEntity.ok(service.search(term, page, size).getContent());
+    }
 }
