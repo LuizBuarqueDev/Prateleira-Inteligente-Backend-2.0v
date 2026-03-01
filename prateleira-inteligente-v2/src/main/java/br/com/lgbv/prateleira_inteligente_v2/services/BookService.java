@@ -46,6 +46,7 @@ public class BookService extends GenericService<Book, BookDTO> {
 
     public Page<BookSimplifiedDTO> search(String term, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("title"));
+        System.out.print("Chqanphjfnaujofnajnfjianhjianinafn");
         return bookRepository
                 .search(term, pageable)
                 .map(bookSimplifiedMapper::toDTO);
