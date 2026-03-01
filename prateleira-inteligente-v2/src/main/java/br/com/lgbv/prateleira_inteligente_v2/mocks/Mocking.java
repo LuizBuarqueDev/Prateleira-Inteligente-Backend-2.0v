@@ -27,60 +27,107 @@ public class Mocking {
 
         if (bookRepository.count() > 0) return;
 
-        /* ================= USER ================= */
-        AppUser user = new AppUser();
-        user.setUsername("luiz");
-        user.setPassword("123456");
-        user.setRole(UserRole.USER);
-        userRepository.save(user);
+        /* ================= USERS ================= */
+        AppUser admin = new AppUser();
+        admin.setUsername("admin_master");
+        admin.setPassword("123456");
+        admin.setRole(UserRole.ADMIN);
+        userRepository.save(admin);
 
-        /* ================= CATEGORY ================= */
-        Categories category = new Categories();
-        category.setName("Tecnologia");
-        categoriesRepository.save(category);
+        AppUser maria = new AppUser();
+        maria.setUsername("maria_dev");
+        maria.setPassword("123456");
+        maria.setRole(UserRole.USER);
+        userRepository.save(maria);
 
-        /* ================= AUTHOR ================= */
-        Author author = new Author();
-        author.setName("Luiz Gabriel");
-        authorRepository.save(author);
+        AppUser carlos = new AppUser();
+        carlos.setUsername("carlos_reader");
+        carlos.setPassword("123456");
+        carlos.setRole(UserRole.USER);
+        userRepository.save(carlos);
 
-        for (int i = 1; i <= 10; i++) {
+        /* ================= CATEGORIES ================= */
+        Categories backend = new Categories();
+        backend.setName("Backend");
+        categoriesRepository.save(backend);
 
-            /* ================= BOOK ================= */
+        Categories frontend = new Categories();
+        frontend.setName("Frontend");
+        categoriesRepository.save(frontend);
+
+        Categories devops = new Categories();
+        devops.setName("DevOps");
+        categoriesRepository.save(devops);
+
+        Categories arquitetura = new Categories();
+        arquitetura.setName("Arquitetura de Software");
+        categoriesRepository.save(arquitetura);
+
+        /* ================= AUTHORS ================= */
+        Author roberto = new Author();
+        roberto.setName("Roberto Almeida");
+        authorRepository.save(roberto);
+
+        Author fernanda = new Author();
+        fernanda.setName("Fernanda Lima");
+        authorRepository.save(fernanda);
+
+        Author thiago = new Author();
+        thiago.setName("Thiago Martins");
+        authorRepository.save(thiago);
+
+        Author[] authors = {roberto, fernanda, thiago};
+        Categories[] categories = {backend, frontend, devops, arquitetura};
+        AppUser[] users = {admin, maria, carlos};
+
+        /* ================= BOOKS ================= */
+        for (int i = 1; i <= 20; i++) {
+
             Book book = new Book();
-            book.setTitle("Spring Boot Avançado " + i);
-            book.setDescription("Livro focado em arquitetura backend com Spring Boot - Volume " + i);
-            book.setPublisher("Tech Books");
-            book.setPublicationDate(LocalDate.of(2024, 1, i));
-            book.setScore(4.0 + (i * 0.1));
-            book.setAssessmentQuantity(100L + i);
+            book.setTitle("Livro Tech Volume " + i);
+            book.setDescription("Explorando conceitos avançados de desenvolvimento - Volume " + i);
+            book.setPublisher("Digital Tech Press");
+            book.setPublicationDate(LocalDate.of(2023 + (i % 3), (i % 12) + 1, (i % 28) + 1));
+            book.setScore(3.5 + (i % 5) * 0.3);
+            book.setAssessmentQuantity(50L + i * 3);
 
-            book.setAuthors(Set.of(author));
-            book.setCategories(Set.of(category));
+            Author selectedAuthor = authors[i % authors.length];
+            Categories selectedCategory = categories[i % categories.length];
+
+            book.setAuthors(Set.of(selectedAuthor));
+            book.setCategories(Set.of(selectedCategory));
 
             bookRepository.save(book);
 
-            author.getBooks().add(book);
-            category.getBooks().add(book);
+            selectedAuthor.getBooks().add(book);
+            selectedCategory.getBooks().add(book);
 
             /* ================= USER_BOOK ================= */
+            AppUser selectedUser = users[i % users.length];
+
             UserBook userBook = new UserBook();
-            userBook.setUser(user);
+            userBook.setUser(selectedUser);
             userBook.setBook(book);
-            userBook.setRating(4 + (i % 2));
-            userBook.setOnShelf(true);
+            userBook.setRating(3 + (i % 3));
+            userBook.setOnShelf(i % 2 == 0);
             userBookRepository.save(userBook);
 
             /* ================= COMMENT ================= */
             Comment comment = new Comment();
-            comment.setUser(user);
+            comment.setUser(selectedUser);
             comment.setBook(book);
-            comment.setText("Comentário sobre o livro volume " + i);
+            comment.setText("Excelente leitura! Volume " + i + " agregou muito conhecimento.");
             comment.setCreatedAt(Instant.now());
             commentRepository.save(comment);
         }
 
-        authorRepository.save(author);
-        categoriesRepository.save(category);
+        authorRepository.save(roberto);
+        authorRepository.save(fernanda);
+        authorRepository.save(thiago);
+
+        categoriesRepository.save(backend);
+        categoriesRepository.save(frontend);
+        categoriesRepository.save(devops);
+        categoriesRepository.save(arquitetura);
     }
 }
