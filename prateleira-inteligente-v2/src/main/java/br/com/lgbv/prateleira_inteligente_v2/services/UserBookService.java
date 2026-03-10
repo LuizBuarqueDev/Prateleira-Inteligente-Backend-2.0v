@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -26,5 +28,12 @@ public class UserBookService extends GenericService<UserBook, UserBookDTO> {
     @Override
     protected BaseMapper<UserBook, UserBookDTO> getMapper() {
         return userBookMapper;
+    }
+
+    public List<UserBookDTO> getByUserId(UUID userId){
+        return userBookRepository.findByUserId(userId)
+                .stream()
+                .map(userBookMapper::toDto)
+                .toList();
     }
 }
