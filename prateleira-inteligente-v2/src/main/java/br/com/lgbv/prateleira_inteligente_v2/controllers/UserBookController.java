@@ -20,7 +20,7 @@ public class UserBookController extends GenericController<UserBookDTO, UserBookS
         super(service);
     }
 
-    @RequestMapping("/user-id")
+    @RequestMapping("/by-user-id")
     @Operation(summary = "Get all books by user id")
     public ResponseEntity<List<UserBookDTO>> getByUserId(UUID userId){
         return ResponseEntity.ok(service.getByUserId(userId)) ;
