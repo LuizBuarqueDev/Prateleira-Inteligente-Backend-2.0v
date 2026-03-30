@@ -31,18 +31,21 @@ public class Mocking {
         AppUser admin = new AppUser();
         admin.setUsername("admin_master");
         admin.setPassword("123456");
+        admin.setEmail("admin_master@gmail.com");
         admin.setRole(UserRole.ADMIN);
         userRepository.save(admin);
 
         AppUser maria = new AppUser();
         maria.setUsername("maria_dev");
         maria.setPassword("123456");
+        maria.setEmail("maria_dev@gmail.com");
         maria.setRole(UserRole.USER);
         userRepository.save(maria);
 
         AppUser carlos = new AppUser();
         carlos.setUsername("carlos_reader");
         carlos.setPassword("123456");
+        carlos.setEmail("carlos_reader@gmail.com");
         carlos.setRole(UserRole.USER);
         userRepository.save(carlos);
 
