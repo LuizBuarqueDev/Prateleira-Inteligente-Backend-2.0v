@@ -27,6 +27,9 @@ public class AppUser extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     @OneToMany(mappedBy = "user")
     private Set<UserBook> userBooks = new HashSet<>();
 

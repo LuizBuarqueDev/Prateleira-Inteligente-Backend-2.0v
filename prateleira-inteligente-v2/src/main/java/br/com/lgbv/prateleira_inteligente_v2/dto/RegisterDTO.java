@@ -1,6 +1,9 @@
 package br.com.lgbv.prateleira_inteligente_v2.dto;
 
-public class ResgisterDTO {
+import lombok.Data;
+
+@Data
+public class RegisterDTO {
     String username;
     String password;
     String email;

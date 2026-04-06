@@ -44,6 +44,6 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return appUser.isEnabled();
     }
 }
