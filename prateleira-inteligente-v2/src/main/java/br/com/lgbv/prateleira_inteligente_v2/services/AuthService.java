@@ -43,7 +43,7 @@ public class AuthService {
 
         EmailVerificationToken token = emailVerificationService.createToken(savedUser);
 
-        String link = "http://localhost:8080/auth/verify-email?token=" + token.getToken();
+        String link = "http://localhost:8080/api/auth/verify-email?token=" + token.getToken();
 
         emailService.sendVerificationEmail(savedUser.getEmail(), link);
     }
