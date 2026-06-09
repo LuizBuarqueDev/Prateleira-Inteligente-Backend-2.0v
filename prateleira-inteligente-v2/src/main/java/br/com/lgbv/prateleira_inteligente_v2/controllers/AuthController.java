@@ -21,7 +21,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/regiter")
+    @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO registerDTO) {
         authService.register(registerDTO);
         return ResponseEntity.ok("Verify your email to activate your account");
