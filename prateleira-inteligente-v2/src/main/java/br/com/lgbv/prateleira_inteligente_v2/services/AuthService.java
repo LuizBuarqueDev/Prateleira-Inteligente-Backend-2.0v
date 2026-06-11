@@ -9,6 +9,7 @@ import br.com.lgbv.prateleira_inteligente_v2.entities.EmailVerificationToken;
 import br.com.lgbv.prateleira_inteligente_v2.enums.UserRole;
 import br.com.lgbv.prateleira_inteligente_v2.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.DisabledException;
@@ -25,6 +26,9 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final EmailVerificationService emailVerificationService;
     private final EmailService emailService;
+
+    @Value("${app.backend-url}")
+    private String backendUrl;
 
     public void register(RegisterDTO request) {
 
@@ -43,7 +47,7 @@ public class AuthService {
 
         EmailVerificationToken token = emailVerificationService.createToken(savedUser);
 
-        String link = "http://localhost:8080/api/auth/verify-email?token=" + token.getToken();
+        String link = backendUrl + "/api/auth/verify-email?token=" + token.getToken();
 
         emailService.sendVerificationEmail(savedUser.getEmail(), link);
     }
