@@ -3,6 +3,7 @@ package br.com.lgbv.prateleira_inteligente_v2.services;
 import br.com.lgbv.prateleira_inteligente_v2.dto.BookDTO;
 import br.com.lgbv.prateleira_inteligente_v2.dto.simplified.BookSimplifiedDTO;
 import br.com.lgbv.prateleira_inteligente_v2.entities.Book;
+import br.com.lgbv.prateleira_inteligente_v2.enums.BookSortField;
 import br.com.lgbv.prateleira_inteligente_v2.mappers.BaseMapper;
 import br.com.lgbv.prateleira_inteligente_v2.mappers.BookMapper;
 import br.com.lgbv.prateleira_inteligente_v2.mappers.simplified.BookSimplifiedMapper;
@@ -46,9 +47,31 @@ public class BookService extends GenericService<Book, BookDTO> {
 
     public Page<BookSimplifiedDTO> search(String term, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("title"));
-        System.out.print("Chqanphjfnaujofnajnfjianhjianinafn");
         return bookRepository
                 .search(term, pageable)
+                .map(bookSimplifiedMapper::toDTO);
+    }
+
+    public Page<BookSimplifiedDTO> getAllSortedByParams (
+            int page,
+            int size,
+            BookSortField sortBy,
+            boolean ascending
+    ) {
+        String field = switch (sortBy) {
+            case TITLE -> "title";
+            case SCORE -> "score";
+            case PUBLICATION_DATE -> "publicationDate";
+            case ASSESSMENT_QUANTITY -> "assessmentQuantity";
+        };
+        Sort sort = ascending
+                ? Sort.by(field).ascending()
+                : Sort.by(field).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return bookRepository
+                .findAll(pageable)
                 .map(bookSimplifiedMapper::toDTO);
     }
 }
