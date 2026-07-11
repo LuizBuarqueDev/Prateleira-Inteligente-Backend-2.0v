@@ -22,12 +22,17 @@ services:
       DB_URL: jdbc:postgresql://postgres:5432/mydatabase
       DB_USERNAME: myuser
       DB_PASSWORD: secret
+
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRATION: ${JWT_EXPIRATION}
+
       MAIL_HOST: ${MAIL_HOST}
       MAIL_PORT: ${MAIL_PORT}
       MAIL_USERNAME: ${MAIL_USERNAME}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
+
+      FRONTEND_URL: ${FRONTEND_URL}
+      BACKEND_URL: ${BACKEND_URL}
 
 volumes:
   postgres_data:
