@@ -14,32 +14,35 @@ services:
       retries: 10
     restart: unless-stopped
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      postgres:
-        condition: service_healthy
-    expose:
-      - "8080"
-    environment:
-      SERVER_PORT: 8080
+app:
+  build:
+    context: .
+    dockerfile: Dockerfile
 
-      DB_URL: jdbc:postgresql://postgres:5432/mydatabase
-      DB_USERNAME: myuser
-      DB_PASSWORD: ${DB_PASSWORD}
+  depends_on:
+    postgres:
+      condition: service_healthy
 
-      JWT_SECRET: ${JWT_SECRET}
-      JWT_EXPIRATION: ${JWT_EXPIRATION}
+  ports:
+    - "8081:8080"
 
-      MAIL_HOST: ${MAIL_HOST}
-      MAIL_PORT: ${MAIL_PORT}
-      MAIL_USERNAME: ${MAIL_USERNAME}
-      MAIL_PASSWORD: ${MAIL_PASSWORD}
+  environment:
+    SERVER_PORT: 8080
 
-      FRONTEND_URL: ${FRONTEND_URL}
-      BACKEND_URL: ${BACKEND_URL}
+    DB_URL: jdbc:postgresql://postgres:5432/mydatabase
+    DB_USERNAME: myuser
+    DB_PASSWORD: ${DB_PASSWORD}
+
+    JWT_SECRET: ${JWT_SECRET}
+    JWT_EXPIRATION: ${JWT_EXPIRATION}
+
+    MAIL_HOST: ${MAIL_HOST}
+    MAIL_PORT: ${MAIL_PORT}
+    MAIL_USERNAME: ${MAIL_USERNAME}
+    MAIL_PASSWORD: ${MAIL_PASSWORD}
+
+    FRONTEND_URL: ${FRONTEND_URL}
+    BACKEND_URL: ${BACKEND_URL}
 
     restart: unless-stopped
 
