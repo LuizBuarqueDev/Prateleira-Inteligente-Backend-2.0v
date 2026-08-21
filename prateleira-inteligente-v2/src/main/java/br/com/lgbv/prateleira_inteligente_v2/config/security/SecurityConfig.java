@@ -39,12 +39,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Autenticação
                         .requestMatchers("/api/auth/**").permitAll()
-                        // Contagem de registros
-                        .requestMatchers(HttpMethod.GET, "/api/**/count").permitAll()
-                        // GET públicos
-                        .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/books/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+                        //Permite GETs para todos os endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                         // Swagger
                         .requestMatchers(
                                 "/swagger-ui/**",
