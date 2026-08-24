@@ -7,6 +7,7 @@ import br.com.lgbv.prateleira_inteligente_v2.services.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO registerDTO) {
+    public ResponseEntity<HttpStatus> register(@RequestBody @Valid RegisterDTO registerDTO) {
         authService.register(registerDTO);
-        return ResponseEntity.ok("Verify your email to activate your account");
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/login")
@@ -32,10 +33,10 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(loginDTO));
     }
 
-    @GetMapping("/verify-email")
-    public ResponseEntity<String> verifyEmail(@RequestParam String token) {
-        authService.verifyEmail(token);
-        return ResponseEntity.ok("Email verified successfully");
-    }
+//    @GetMapping("/verify-email")
+//    public ResponseEntity<String> verifyEmail(@RequestParam String token) {
+//        authService.verifyEmail(token);
+//        return ResponseEntity.ok("Email verified successfully");
+//    }
 }
 
