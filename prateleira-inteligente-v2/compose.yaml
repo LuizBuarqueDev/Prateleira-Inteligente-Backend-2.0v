@@ -45,5 +45,19 @@ services:
 
     restart: unless-stopped
 
+  frontend:
+    profiles: ["frontend"]
+    build:
+      context: ../../Prateleira-Inteligente-Frontend-2.0v/Prateleira-Inteligente-Frontend-2.0v
+      dockerfile: Dockerfile
+
+    ports:
+      - "4200:80"
+
+    depends_on:
+      - app
+
+    restart: unless-stopped
+
 volumes:
   postgres_data:
