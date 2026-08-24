@@ -33,6 +33,7 @@ public class Mocking {
         admin.setPassword("123456");
         admin.setEmail("admin_master@gmail.com");
         admin.setRole(UserRole.ADMIN);
+        admin.setEnabled(true);
         userRepository.save(admin);
 
         AppUser maria = new AppUser();
@@ -40,6 +41,7 @@ public class Mocking {
         maria.setPassword("123456");
         maria.setEmail("maria_dev@gmail.com");
         maria.setRole(UserRole.USER);
+        maria.setEnabled(true);
         userRepository.save(maria);
 
         AppUser carlos = new AppUser();
@@ -47,6 +49,7 @@ public class Mocking {
         carlos.setPassword("123456");
         carlos.setEmail("carlos_reader@gmail.com");
         carlos.setRole(UserRole.USER);
+        carlos.setEnabled(true);
         userRepository.save(carlos);
 
         /* ================= CATEGORIES ================= */
